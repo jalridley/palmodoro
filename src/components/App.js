@@ -1,7 +1,7 @@
 import React from 'react';
 
 const App = () => {
-    return <div>Pomodoro</div>;
+    return <div>TEST Pomodoro</div>;
 };
 
 export default App;
