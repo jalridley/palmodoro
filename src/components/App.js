@@ -1,7 +1,7 @@
 import React from 'react';
 
 const App = () => {
-    return <div>TEST git master main Pomodoro</div>;
+    return <div>Pomodoro</div>;
 };
 
 export default App;
