@@ -1,4 +1,25 @@
+// for all global scss
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit; // inherits from html below
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; // 1rem=10px (10px/16px = 62.5)
+}
+
+body {
+    background-color: lightgoldenrodyellow;
+}
+
 .container {
+    max-width: 50%;
+    height: 40rem;
+    margin: auto;
     border: 2px solid black;
     background-color: burlywood;
 }
