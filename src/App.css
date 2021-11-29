@@ -22,23 +22,45 @@ body {
   height: 65rem;
   margin: auto;
   border: 2px solid yellow;
-  background-color: lightgray;
+  background-color: #000;
 }
 
 .container .header {
   width: 100%;
+  height: 13rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 100% -1rem;
+     object-position: 100% -1rem;
 }
 
 .container .image-container {
-  height: 25rem;
+  height: 35rem;
   border: 2px solid #d470d9;
   border-radius: 2.5rem 2.5rem 0 0;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .container .image-container img {
-  -o-object-fit: contain;
-     object-fit: contain;
-  height: 100%;
+  height: 85%;
   border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 /*# sourceMappingURL=App.css.map */
