@@ -1,0 +1,33 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #000;
+}
+
+.container {
+  max-width: 50%;
+  height: 40rem;
+  margin: auto;
+  border: 2px solid yellow;
+  background-color: lightgray;
+}
+
+.container img {
+  height: 40rem;
+  width: 40rem;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=App.css.map */

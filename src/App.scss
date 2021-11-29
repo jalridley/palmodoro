@@ -13,13 +13,19 @@ html {
 }
 
 body {
-    background-color: lightgoldenrodyellow;
+    background-color: #000;
 }
 
 .container {
     max-width: 50%;
     height: 40rem;
     margin: auto;
-    border: 2px solid black;
-    background-color: burlywood;
+    border: 2px solid yellow;
+    background-color: lightgray;
+
+    img {
+        height: 40rem;
+        width: 40rem;
+        border-radius: 50%;
+    }
 }
