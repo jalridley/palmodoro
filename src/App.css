@@ -30,14 +30,15 @@ body {
 }
 
 .container .image-container {
-  height: 42.7rem;
+  height: 25rem;
   border: 2px solid #d470d9;
   border-radius: 2.5rem 2.5rem 0 0;
 }
 
 .container .image-container img {
+  -o-object-fit: contain;
+     object-fit: contain;
   height: 100%;
-  width: 100%;
   border-radius: 50%;
 }
 /*# sourceMappingURL=App.css.map */

@@ -28,12 +28,12 @@ body {
     }
 
     .image-container {
-        height: 42.7rem;
+        height: 25rem;
         border: 2px solid #d470d9;
         border-radius: 2.5rem 2.5rem 0 0;
         img {
+            object-fit: contain;
             height: 100%;
-            width: 100%;
             border-radius: 50%;
         }
     }
