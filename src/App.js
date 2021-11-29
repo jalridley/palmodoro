@@ -1,13 +1,16 @@
 import React from 'react';
+import { Header } from './components/Header';
+import { ImageContainer } from './components/ImageContainer';
 import './App.scss';
 // import image from '../palm-flam.jpg';
 
 const App = () => {
     return (
         <div className="container">
-            <img src="./palm-flam.jpg" alt="pink flamingo" />
-            <h1>Palmodoro</h1>
-            <h2>Ready...set...go!</h2>
+            <Header />
+            <div className="image-container">
+                <ImageContainer />
+            </div>
         </div>
     );
 };

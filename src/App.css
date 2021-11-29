@@ -18,16 +18,26 @@ body {
 }
 
 .container {
-  max-width: 50%;
-  height: 40rem;
+  max-width: 45rem;
+  height: 65rem;
   margin: auto;
   border: 2px solid yellow;
   background-color: lightgray;
 }
 
-.container img {
-  height: 40rem;
-  width: 40rem;
+.container .header {
+  width: 100%;
+}
+
+.container .image-container {
+  height: 42.7rem;
+  border: 2px solid #d470d9;
+  border-radius: 2.5rem 2.5rem 0 0;
+}
+
+.container .image-container img {
+  height: 100%;
+  width: 100%;
   border-radius: 50%;
 }
 /*# sourceMappingURL=App.css.map */
