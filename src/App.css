@@ -74,4 +74,8 @@ body {
   -ms-flex-line-pack: center;
       align-content: center;
 }
+
+.container .timer {
+  color: #3dc185;
+}
 /*# sourceMappingURL=App.css.map */
