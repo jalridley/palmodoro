@@ -28,9 +28,8 @@ body {
 
 .container .header {
   width: 100%;
-  height: 13rem;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: contain;
+     object-fit: contain;
   -o-object-position: 100% -1rem;
      object-position: 100% -1rem;
 }
@@ -50,10 +49,21 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+  top: -5.75rem;
+}
+
+.container .image-container .menu-icon {
+  width: 5.5rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 .container .image-container img {
-  height: 85%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 85%;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
