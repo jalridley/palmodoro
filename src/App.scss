@@ -75,4 +75,14 @@ body {
         justify-content: center;
         align-items: center;
     }
+
+    .controls {
+        color: white;
+        border: 2px solid orange;
+        height: 7rem;
+        margin-right: 4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }

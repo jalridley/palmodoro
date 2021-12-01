@@ -2,8 +2,10 @@ import React from 'react';
 import { Header } from './components/Header';
 import { ImageContainer } from './components/ImageContainer';
 import { Menu } from './components/Menu';
-import './App.scss';
 import { Timer } from './components/Timer';
+import { Controls } from './components/Controls';
+
+import './App.scss';
 // import image from '../palm-flam.jpg';
 
 const App = () => {
@@ -16,6 +18,9 @@ const App = () => {
             </div>
             <div>
                 <Timer />
+            </div>
+            <div className="controls">
+                <Controls />
             </div>
         </div>
     );
