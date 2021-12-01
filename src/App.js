@@ -19,7 +19,7 @@ const App = () => {
             <div>
                 <Timer />
             </div>
-            <div className="controls">
+            <div>
                 <Controls />
             </div>
         </div>
