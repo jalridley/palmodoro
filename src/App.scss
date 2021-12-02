@@ -68,12 +68,14 @@ body {
         color: #3dc185;
         height: 7rem;
         font-size: 6rem;
+        font-size: 4.7vw; //14vw, phone 8.5vw ipad, 5.2vh laptop, 4.7vw big
         border: 2px solid red;
         margin-left: 4rem;
         margin-right: 4rem;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: -57px;
     }
 
     .controls {
@@ -88,7 +90,8 @@ body {
         align-items: center;
 
         img {
-            height: 7rem;
+            height: 100%;
+            width: 20%;
         }
     }
 }
