@@ -51,13 +51,16 @@ body {
         position: relative;
 
         .menu-icon {
+            box-shadow: none;
             width: 5.5rem;
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
         }
 
-        img {
+        .flamingo-image {
+            box-shadow: 0 0 6rem #181039;
+
             object-fit: contain;
             // height: 85%;
             width: 85%;
