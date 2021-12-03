@@ -51,7 +51,6 @@ body {
         position: relative;
 
         .menu-icon {
-            box-shadow: 0 0 0.8rem #3dc185;
             width: 5rem;
             position: absolute;
             top: 3px;
@@ -74,6 +73,7 @@ body {
     .timer {
         font-family: 'Orbitron', sans-serif;
         color: #3dc185;
+        text-shadow: 0 0 0.8rem #3dc185;
         height: 7rem;
         font-size: 6rem;
         font-size: 16vw; //14vw, phone 8.5vw ipad, 5.2vh laptop, 4.7vw big
@@ -88,6 +88,7 @@ body {
     .controls {
         color: #3dc185;
         font-size: 3rem;
+        text-shadow: 0 0 0.8rem #3dc185;
         font-family: 'Orbitron', sans-serif;
         border: 2px solid orange;
         height: 7rem;
