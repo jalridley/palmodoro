@@ -51,11 +51,11 @@ body {
         position: relative;
 
         .menu-icon {
-            box-shadow: none;
-            width: 5.5rem;
+            box-shadow: 0 0 0.8rem #3dc185;
+            width: 5rem;
             position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
+            top: 3px;
+            right: 1rem;
         }
 
         .flamingo-image {
