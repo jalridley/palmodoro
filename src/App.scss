@@ -14,6 +14,8 @@ html {
 
 body {
     background-color: #000;
+    --pink: #d470d9;
+    --green: #3dc185;
 }
 
 .container {
@@ -28,11 +30,11 @@ body {
 
     .header {
         font-family: 'Sacramento', cursive;
-        color: #d470d9;
+        color: var(--pink);
         font-size: 9rem;
         width: 100%;
         height: 10rem;
-        text-shadow: 0 0 0.8rem #d470d9;
+        text-shadow: 0 0 0.8rem var(--pink);
         /* object-fit: cover; */
         /* margin-bottom: -4rem; */
         /* object-position: 0 25%; */
@@ -40,8 +42,8 @@ body {
 
     .image-container {
         height: 35rem;
-        border: 2px solid #d470d9;
-        box-shadow: 0 0 0.8rem #d470d9;
+        border: 2px solid var(--pink);
+        box-shadow: 0 0 0.8rem var(--pink);
         border-radius: 2.5rem 2.5rem 0 0;
         margin-left: 2rem;
         margin-right: 2rem;
@@ -72,8 +74,8 @@ body {
 
     .timer {
         font-family: 'Orbitron', sans-serif;
-        color: #3dc185;
-        text-shadow: 0 0 0.8rem #3dc185;
+        color: var(--green);
+        text-shadow: 0 0 0.8rem var(--green);
         height: 7rem;
         font-size: 6rem;
         font-size: 16vw; //14vw, phone 8.5vw ipad, 5.2vh laptop, 4.7vw big
@@ -86,9 +88,9 @@ body {
     }
 
     .controls {
-        color: #3dc185;
+        color: var(--green);
         font-size: 3rem;
-        text-shadow: 0 0 0.8rem #3dc185;
+        text-shadow: 0 0 0.8rem var(--green);
         font-family: 'Orbitron', sans-serif;
         border: 2px solid orange;
         height: 7rem;
