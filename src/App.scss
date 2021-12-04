@@ -16,6 +16,10 @@ body {
     background-color: #000;
     --pink: #d470d9;
     --green: #3dc185;
+    --box-shadow-pink: 0 0 0.8rem var(--pink);
+    --text-shadow-pink: 0 0 0.8rem var(--pink);
+    --text-shadow-green: 0 0 0.8rem var(--green);
+    --margin-l-r: 0 2rem 0 2rem;
 }
 
 .container {
@@ -23,7 +27,6 @@ body {
     height: 100vh;
     margin: auto;
     border: 2px solid yellow;
-    background-color: #000;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,19 +37,15 @@ body {
         font-size: 9rem;
         width: 100%;
         height: 10rem;
-        text-shadow: 0 0 0.8rem var(--pink);
-        /* object-fit: cover; */
-        /* margin-bottom: -4rem; */
-        /* object-position: 0 25%; */
+        text-shadow: var(--text-shadow-pink);
     }
 
     .image-container {
         height: 35rem;
         border: 2px solid var(--pink);
-        box-shadow: 0 0 0.8rem var(--pink);
+        box-shadow: var(--box-shadow-pink);
         border-radius: 2.5rem 2.5rem 0 0;
-        margin-left: 2rem;
-        margin-right: 2rem;
+        margin: var(--margin-l-r);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -75,13 +74,12 @@ body {
     .timer {
         font-family: 'Orbitron', sans-serif;
         color: var(--green);
-        text-shadow: 0 0 0.8rem var(--green);
+        text-shadow: var(--text-shadow-green);
         height: 7rem;
         font-size: 6rem;
         font-size: 16vw; //14vw, phone 8.5vw ipad, 5.2vh laptop, 4.7vw big
         border: 2px solid red;
-        margin-left: 2rem;
-        margin-right: 2rem;
+        margin: var(--margin-l-r);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -90,12 +88,11 @@ body {
     .controls {
         color: var(--green);
         font-size: 3rem;
-        text-shadow: 0 0 0.8rem var(--green);
+        text-shadow: var(--text-shadow-green);
         font-family: 'Orbitron', sans-serif;
         border: 2px solid orange;
         height: 7rem;
-        margin-left: 2rem;
-        margin-right: 2rem;
+        margin: var(--margin-l-r);
         display: flex;
         justify-content: space-between;
         align-items: center;
