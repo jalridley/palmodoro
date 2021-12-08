@@ -1,3 +1,5 @@
+# Palmodoro
+
 <img src="https://github.com/jalridley/palmodoro/blob/master/public/palmodoro-homescreen.png" height="500" />
 
 ## **About the Project**
