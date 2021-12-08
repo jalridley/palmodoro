@@ -1,4 +1,4 @@
-<img src="https://github.com/jalridley/palmodoro/blob/master/public/palmodoro-homescreen.png" height="500" />
+<img src="https://github.com/jalridley/palmodoro/blob/master/public/palmodoro-homescreen.png" />
 
 ## **About the Project**
 
