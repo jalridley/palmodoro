@@ -9,4 +9,4 @@ My first React app! It is a pomodoro timer web app to put what I have learned in
 -   React
 -   Javascript
 -   HTML/CSS/SCSS
--   this project is mobile first
+-   this project is mobile first with responsive design
