@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+// import Controls from './Controls'
+import pause1 from '../pause1.svg';
+import pause2 from '../pause2.svg';
+import play from '../play.svg';
+import reset from '../reset.svg';
 
 /* basic timer psuedo code:
 1. import usestate/useEffect
@@ -16,8 +21,29 @@ import React from 'react';
 7. in useEffect: use set interval and create if/else logic for when timer turns on and off 
 8. in timer div, create spans for hour, minutes, seconds with calculations using time state
 9. 
-
 */
+
 export const Timer = () => {
-    return <div className="timer">25:00:00</div>;
+    const [time, setTime] = useState(25);
+    const [timerOn, setTimerOn] = useState(false);
+    console.log(timerOn);
+    console.log(time);
+
+    return (
+        <div>
+            <div className="timer">{time}</div>
+            <div className="controls">
+                <img src={play} alt="play" onClick={() => setTimerOn(true)} />
+                1/12
+                <img
+                    src={pause1}
+                    alt="pause"
+                    onClick={() => setTimerOn(false)}
+                />
+            </div>
+            {/* <div className="reset">
+                <img src={reset} alt="reset" onClick={() => setTime(time)} />
+            </div> */}
+        </div>
+    );
 };
