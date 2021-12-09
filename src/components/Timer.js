@@ -17,6 +17,7 @@ import reset from '../reset.svg';
     - timer itself with 25 default (change to user input when complete)
     - state of timer on set to default of false
 5. add time usestate to timer div
+
 6. create useEffect function to run when timer on variable changes
 7. in useEffect: use set interval and create if/else logic for when timer turns on and off 
 8. in timer div, create spans for hour, minutes, seconds with calculations using time state
@@ -24,10 +25,29 @@ import reset from '../reset.svg';
 */
 
 export const Timer = () => {
-    const [time, setTime] = useState(25);
+    let userTime = 25;
+    const [time, setTime] = useState(userTime);
     const [timerOn, setTimerOn] = useState(false);
-    console.log(timerOn);
-    console.log(time);
+
+    // runs when component is rendered every time timer on changes
+    useEffect(() => {
+        // when timer is on or off logic
+        // use setInterval js method
+        let interval = null;
+
+        if (timerOn) {
+            interval = setInterval(() => {
+                setTime(previous => previous - 10); // decrease time by 10 milliseconds
+            }, 10);
+        } else {
+            clearInterval(interval);
+        }
+
+        // cleanup to stop interval when user leaves the page
+        return () => {
+            clearInterval(interval);
+        };
+    }, [timerOn]);
 
     return (
         <div>
@@ -42,7 +62,11 @@ export const Timer = () => {
                 />
             </div>
             <div className="reset">
-                <img src={reset} alt="reset" onClick={() => setTime(time)} />
+                <img
+                    src={reset}
+                    alt="reset"
+                    onClick={() => setTime(userTime)}
+                />
             </div>
         </div>
     );
