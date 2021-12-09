@@ -41,9 +41,9 @@ export const Timer = () => {
                     onClick={() => setTimerOn(false)}
                 />
             </div>
-            {/* <div className="reset">
+            <div className="reset">
                 <img src={reset} alt="reset" onClick={() => setTime(time)} />
-            </div> */}
+            </div>
         </div>
     );
 };
