@@ -25,7 +25,7 @@ import reset from '../reset.svg';
 */
 
 export const Timer = () => {
-    let userTime = 25;
+    let userTime = 250000;
     const [time, setTime] = useState(userTime);
     const [timerOn, setTimerOn] = useState(false);
 
@@ -51,7 +51,19 @@ export const Timer = () => {
 
     return (
         <div>
-            <div className="timer">{time}</div>
+            <div className="timer">
+                {/* slice(-2) to only show last 2 digits, inlcuding 0 on single digit numbers */}
+                <span>
+                    {('0' + Math.floor((time / 60000) % 60)).slice(-2) + ' :'}
+                </span>
+                {/* 60k ms in a minute */}
+                <span>
+                    {('0' + Math.floor((time / 1000) % 60)).slice(-2) + ' : '}
+                </span>
+                {/* 1000 = 1 second */}
+                <span>{('0' + ((time / 10) % 100)).slice(-2)}</span>
+                {/* 10 = ms */}
+            </div>
             <div className="controls">
                 <img src={play} alt="play" onClick={() => setTimerOn(true)} />
                 1/12
