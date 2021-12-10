@@ -53,16 +53,18 @@ export const Timer = () => {
         <div>
             <div className="timer">
                 {/* slice(-2) to only show last 2 digits, inlcuding 0 on single digit numbers */}
-                <span>
-                    {('0' + Math.floor((time / 60000) % 60)).slice(-2) + ' :'}
-                </span>
                 {/* 60k ms in a minute */}
                 <span>
-                    {('0' + Math.floor((time / 1000) % 60)).slice(-2) + ' : '}
+                    {('0' + Math.floor((time / 60000) % 60)).slice(-2) + ':'}
                 </span>
+
                 {/* 1000 = 1 second */}
-                <span>{('0' + ((time / 10) % 100)).slice(-2)}</span>
+                <span>
+                    {('0' + Math.floor((time / 1000) % 60)).slice(-2) + ':'}
+                </span>
+
                 {/* 10 = ms */}
+                <span>{('0' + ((time / 10) % 100)).slice(-2)}</span>
             </div>
             <div className="controls">
                 <img src={play} alt="play" onClick={() => setTimerOn(true)} />

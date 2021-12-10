@@ -18,7 +18,7 @@ body {
     --green: #3dc185;
     --box-shadow-pink: 0 0 0.8rem var(--pink);
     --text-shadow-pink: 0 0 0.8rem var(--pink);
-    --text-shadow-green: 0 0 0.8rem var(--green);
+    --text-shadow-green: 0 0 0.3rem var(--green);
     --margin-l-r: 0 2rem 0 2rem;
 }
 
@@ -77,23 +77,33 @@ body {
     }
 
     .timer {
-        font-family: 'Orbitron', sans-serif;
+        /* font-family: 'Orbitron', sans-serif; */
+        font-family: 'VT323', monospace;
         color: var(--green);
-        text-shadow: var(--text-shadow-green);
+        /* text-shadow: var(--text-shadow-green); adjust this or not use? */
         height: 7rem;
-        font-size: 15vw; //14vw, phone 8.5vw ipad, 5.2vh laptop, 4.7vw big
+        font-size: 28vw; //14vw, phone 8.5vw ipad, 5.2vh laptop, 4.7vw big
         // border: 2px solid red;
-        margin: var(--margin-l-r);
+        /* margin: var(--margin-l-r); fix variable  */
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 1rem 0 1rem 0;
+
+        /* .numbox {
+            width: 10rem;
+            padding: 0 3px 0 3px;
+            display: flex;
+            justify-content: center;
+        } */
     }
 
     .controls {
         color: var(--green);
         font-size: 3rem;
         text-shadow: var(--text-shadow-green);
-        font-family: 'Orbitron', sans-serif;
+        font-family: 'VT323', monospace;
+        // font-family: 'Orbitron', sans-serif;
         // border: 2px solid orange;
         height: 7rem;
         margin: var(--margin-l-r);
