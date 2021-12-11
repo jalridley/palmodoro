@@ -25,7 +25,7 @@ import reset from '../reset.svg';
 */
 
 export const Timer = () => {
-    let userTime = 25 * 10000;
+    let userTime = 25 * 60000;
     const [time, setTime] = useState(userTime);
     const [timerOn, setTimerOn] = useState(false);
 
@@ -55,7 +55,6 @@ export const Timer = () => {
                 {/* slice(-2) to only show last 2 digits, inlcuding 0 on single digit numbers */}
                 {/* 60k ms in a minute */}
                 <span>
-                    {/* {('0' + Math.floor((time / 60000) % 60)).slice(-2)}: */}
                     {('0' + Math.floor((time / 60000) % 60)).slice(-2)}:
                 </span>
 
