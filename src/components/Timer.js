@@ -18,8 +18,7 @@ import reset from '../reset.svg';
 export const Timer = () => {
     // only for testing purposes
     let userTime = 1 * 60000;
-    let userCount = 1;
-    // let count = 0;
+    let userCount = 2;
 
     const [time, setTime] = useState(userTime);
     const [timerOn, setTimerOn] = useState(false);
@@ -55,11 +54,17 @@ export const Timer = () => {
     if (time === 0 && count !== userCount) {
         // play bell sound
         setCount(count + 1);
+        console.log(count);
         setTimerOn(false);
+        //time will then reference if number of sprints before break have been reached
+        //if true, time(userBreak), print break time! where counter is?
+        //if false:
+        setTime(userTime);
     }
 
     if (count === userCount) {
         // play triumphant sound
+        console.log(count);
         console.log('GOAL REACHED!');
     }
 
