@@ -9,19 +9,28 @@ import reset from '../reset.svg';
 1. put minutes. seconds, milliseconds in variables
 2. insert varioable into timer jsx
 3. create count variable = 0
-4. if all three variables equal 0 AND count != userCount, play bell sound add 1 to count
+4. if time equals 0 AND count != userCount, play bell sound add 1 to count
 5. if count === userCount, play triumph sound, print congratulations! goal reached! to screen
 6. reset timer to userTime  
+7. reset count to 0
 */
 
 export const Timer = () => {
     // only for testing purposes
     let userTime = 1 * 60000;
-    let userCount = 2;
+    let userCount = 1;
+    // let count = 0;
 
     const [time, setTime] = useState(userTime);
     const [timerOn, setTimerOn] = useState(false);
-    const [count, setCount] = useState(userCount);
+    const [count, setCount] = useState(0);
+
+    //60k ms in a minute
+    const minutes = ('0' + Math.floor((time / 60000) % 60)).slice(-2);
+    // 1000 = 1 second
+    const seconds = ('0' + Math.floor((time / 1000) % 60)).slice(-2);
+    //10 = ms
+    const milliseconds = ('0' + ((time / 10) % 100)).slice(-2);
 
     // runs when component is rendered every time timer on changes
     useEffect(() => {
@@ -43,24 +52,27 @@ export const Timer = () => {
         };
     }, [timerOn]);
 
+    if (time === 0 && count !== userCount) {
+        // play bell sound
+        setCount(count + 1);
+        setTimerOn(false);
+    }
+
+    if (count === userCount) {
+        // play triumphant sound
+        console.log('GOAL REACHED!');
+    }
+
     return (
         <div>
             <div className="timer">
-                {/* slice(-2) to only show last 2 digits, inlcuding 0 on single digit numbers */}
-                {/* 60k ms in a minute */}
-                <span>
-                    {('0' + Math.floor((time / 60000) % 60)).slice(-2)}:
-                </span>
-
-                {/* 1000 = 1 second */}
-                <span>{('0' + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
-
-                {/* 10 = ms */}
-                <span>{('0' + ((time / 10) % 100)).slice(-2)}</span>
+                <span>{minutes}:</span>
+                <span>{seconds}:</span>
+                <span>{milliseconds}</span>
             </div>
             <div className="controls">
                 <img src={play} alt="play" onClick={() => setTimerOn(true)} />
-                1/{userCount}
+                {count}/{userCount}
                 <img
                     src={pause1}
                     alt="pause"
