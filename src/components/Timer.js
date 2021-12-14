@@ -5,20 +5,29 @@ import pause2 from '../pause2.svg';
 import play from '../play.svg';
 import reset from '../reset.svg';
 
-/* counter functionality pseudo code
-1. put minutes. seconds, milliseconds in variables
-2. insert varioable into timer jsx
-3. create count variable = 0
-4. if time equals 0 AND count != userCount, play bell sound add 1 to count
-5. if count === userCount, play triumph sound, print congratulations! goal reached! to screen
-6. reset timer to userTime  
-7. reset count to 0
+/* functionality for break pseudo code
+1. if timer === 0;
+2. setTimerOn false
+3. play bell
+4. sertCount = (count + 1)
+5. if count = userCount
+    true:
+        -play triumphant song
+        - print goal reached
+    else if count = userBreakCount
+        -setTime(userBreakTime)
+    else
+        -setTime(userTime)
+6. add logic to either run userTimer or userBreakTime at beginning
 */
 
 export const Timer = () => {
-    // only for testing purposes
-    let userTime = 1 * 60000;
+    // only for testing purposes. will come from menu component user inputs
+    let userTime = 2 * 1000;
     let userCount = 2;
+    let goal = false;
+    let userBreakTime = 1;
+    let userBreakCount = 1;
 
     const [time, setTime] = useState(userTime);
     const [timerOn, setTimerOn] = useState(false);
@@ -53,19 +62,19 @@ export const Timer = () => {
 
     if (time === 0 && count !== userCount) {
         // play bell sound
-        setCount(count + 1);
-        console.log(count);
         setTimerOn(false);
+        setCount(previousCount => previousCount + 1);
         //time will then reference if number of sprints before break have been reached
         //if true, time(userBreak), print break time! where counter is?
-        //if false:
         setTime(userTime);
     }
 
     if (count === userCount) {
         // play triumphant sound
-        console.log(count);
-        console.log('GOAL REACHED!');
+        //changes state without rerendering the useffect interval function
+        setTimerOn[0] = false;
+        goal = true;
+        // setCount(0);
     }
 
     return (
@@ -77,7 +86,7 @@ export const Timer = () => {
             </div>
             <div className="controls">
                 <img src={play} alt="play" onClick={() => setTimerOn(true)} />
-                {count}/{userCount}
+                {goal ? 'GOAL REACHED!' : `${count} / ${userCount}`}
                 <img
                     src={pause1}
                     alt="pause"
