@@ -5,25 +5,23 @@ import pause2 from '../pause2.svg';
 import play from '../play.svg';
 import reset from '../reset.svg';
 
-/* functionality for break pseudo code
-
--add full reset on  reset button if  goal is  reached
--add logic to either run userTimer or userBreakTime at beginning
+/* to do
+-exclude break as a count increment
+-add full reset if  goal is  reached
 */
 
 export const Timer = () => {
     // only for testing purposes. will come from menu component user inputs
-    let userTime = 3 * 1000;
-    let userCount = 3;
-    let goal = false;
-    let userBreakTime = 2 * 1000;
+    let userTime = 2 * 100;
+    let userCount = 6;
+    let userBreakTime = 1 * 1000;
     let userBreakCount = 2;
-    let breakCounter = userBreakCount;
     let breakTime = false;
 
     const [time, setTime] = useState(userTime);
     const [timerOn, setTimerOn] = useState(false);
     const [count, setCount] = useState(0);
+    const [breakCounter, setBreakCounter] = useState(userBreakCount);
 
     //60k ms in a minute
     const minutes = ('0' + Math.floor((time / 60000) % 60)).slice(-2);
@@ -51,52 +49,54 @@ export const Timer = () => {
             clearInterval(interval);
         };
     }, [timerOn]);
-    console.log(time);
+
+    // console.log(time);
 
     useEffect(() => {
         if (time === 0) {
             // play bell sound
             setTimerOn(false);
-            setCount(previousCount => previousCount + 1);
-            setTime(userTime);
+            if (!breakTime) {
+                setCount(previousCount => previousCount + 1);
+            }
+            console.log('---------');
+            console.log(`count: ${count}`);
+            console.log(`BreakCounter: ${breakCounter}`);
+            console.log(count + 1 === breakCounter);
+            if (count + 1 === breakCounter) {
+                setTime(userBreakTime);
+                console.log(`userBreakCount: ${userBreakCount}`);
+                setBreakCounter(
+                    previousBreakCounter =>
+                        previousBreakCounter + userBreakCount
+                );
+                console.log(` new BreakCounter: ${breakCounter}`);
+            } else {
+                setTime(userTime);
+            }
         }
         //DO A RETURN CLEAR?
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [time]);
+    }, [time, breakCounter, count]);
 
-    useEffect(() => {
-        if (breakTime) {
-            //this is weird code
-            breakTime = false;
-            setTime(userBreakTime);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [time]);
-
-    function checkGoalBreak(count) {
-        breakTime = false;
+    function checkGoalBreak(count, breakCounter) {
+        console.log(`function beginning count: ${count}`);
+        console.log(`function beginning breakCounter: ${breakCounter}`);
         if (count === userCount) {
             // play triumphant sound
             return 'GOAL REACHED!';
-        } else if (count === breakCounter) {
-            //need to set time to break time!!!!
-            //this does not work, and setTime(userBreakTime) causes too many render error
-            //setTime[0] = userTime // does not work becasue it doesnt rerender
-            breakTime = true;
-            breakCounter += userBreakCount;
+        } else if (count !== 0 && count === breakCounter - userBreakCount) {
             console.log(
-                'inside breaktime and breakCounter is: ' + breakCounter
+                `inside breaktime and breakCounter is: ${breakCounter}`
             );
             console.log('count is: ' + count);
             //count remains same as userBreakCount causing infinite loop!
-            //return 'BREAK TIME!'
-            return breakTime;
+            return 'BREAK TIME!';
+            // return breakTime;
         } else {
             // put in variable
             return `${count} / ${userCount}`;
         }
-        //count needs to go back to zero but where and when?
-        //setCount(0);
     }
 
     return (
@@ -108,7 +108,7 @@ export const Timer = () => {
             </div>
             <div className="controls">
                 <img src={play} alt="play" onClick={() => setTimerOn(true)} />
-                {checkGoalBreak(count)}
+                {checkGoalBreak(count, breakCounter)}
                 <img
                     src={pause1}
                     alt="pause"
