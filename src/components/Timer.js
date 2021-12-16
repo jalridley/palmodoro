@@ -13,11 +13,12 @@ import reset from '../reset.svg';
 
 export const Timer = () => {
     // only for testing purposes. will come from menu component user inputs
-    let userTime = 2 * 1000;
-    let userCount = 2;
+    let userTime = 3 * 1000;
+    let userCount = 3;
     let goal = false;
-    let userBreakTime = 1 * 1000;
-    let userBreakCount = 1;
+    let userBreakTime = 2 * 1000;
+    let userBreakCount = 2;
+    let breakCounter = userBreakCount;
     let breakTime = false;
 
     const [time, setTime] = useState(userTime);
@@ -50,47 +51,8 @@ export const Timer = () => {
             clearInterval(interval);
         };
     }, [timerOn]);
-    /* 
-    1. if timer === 0;
-    2. setTimerOn false
-    3. play bell
-    4. setCount = (count + 1) */
+    console.log(time);
 
-    /* NOT WORKING CODE
-    if (time === 0) {
-        setTimerOn(false);
-        // play bell sound
-        setCount(previousCount => previousCount + 1);
-        //time will then reference if number of sprints before break have been reached
-        //if true, time(userBreak), print break time! where counter is?
-        setTime(userTime);
-    }
-    console.log(count);
-    if (count === userCount) {
-        // play triumphant sound
-        goal = true;
-        // setCount(0);
-    } else if (count === userBreakCount) {
-        setTime(userBreakTime);
-        //add to ternary jsx
-        breakTime = true;
-        console.log('if it is break time: ' + time);
-    } */
-    // } else {
-    //     setTime(userTime);
-    //     console.log('if not goal or break, time is: ' + time);
-    // }
-
-    /* 5. if count = userCount
-    true:
-        -play triumphant song
-        - print goal reached
-    else if count = userBreakCount
-        -setTime(userBreakTime)
-    else
-        -setTime(userTime) */
-
-    // WORKING CODE
     useEffect(() => {
         if (time === 0) {
             // play bell sound
@@ -98,15 +60,37 @@ export const Timer = () => {
             setCount(previousCount => previousCount + 1);
             setTime(userTime);
         }
+        //DO A RETURN CLEAR?
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [time]);
 
-    function checkGoal(count) {
+    useEffect(() => {
+        if (breakTime) {
+            //this is weird code
+            breakTime = false;
+            setTime(userBreakTime);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [time]);
+
+    function checkGoalBreak(count) {
+        breakTime = false;
         if (count === userCount) {
             // play triumphant sound
-            //changes state without rerendering the useffect interval function
-            //setTimerOn[0] = false;
             return 'GOAL REACHED!';
+        } else if (count === breakCounter) {
+            //need to set time to break time!!!!
+            //this does not work, and setTime(userBreakTime) causes too many render error
+            //setTime[0] = userTime // does not work becasue it doesnt rerender
+            breakTime = true;
+            breakCounter += userBreakCount;
+            console.log(
+                'inside breaktime and breakCounter is: ' + breakCounter
+            );
+            console.log('count is: ' + count);
+            //count remains same as userBreakCount causing infinite loop!
+            //return 'BREAK TIME!'
+            return breakTime;
         } else {
             // put in variable
             return `${count} / ${userCount}`;
@@ -114,32 +98,6 @@ export const Timer = () => {
         //count needs to go back to zero but where and when?
         //setCount(0);
     }
-
-    function checkBreak(count) {
-        //time will then reference if number of sprints before break have been reached
-        //if true, time(userBreak), print break time! where counter is?
-        breakTime = false;
-        if (count === userBreakCount) {
-            setTime[0] = userBreakTime;
-            //return break time! to jsx
-            // ternuary if breakTime is true brint break time to jsx
-            breakTime = true;
-            return 'BREAK TIME!';
-        } else {
-            //put in variable
-            return `${count} / ${userCount}`;
-        }
-    }
-
-    // return () => {
-    //     cleanup
-    // }
-    //else if (count === userBreakCount) {
-    //     //changes state without rerendering the useffect interval function
-    //     setTime(userBreakTime);
-    //     //add to ternary jsx
-    //     breakTime = true;
-    // }
 
     return (
         <div>
@@ -150,8 +108,7 @@ export const Timer = () => {
             </div>
             <div className="controls">
                 <img src={play} alt="play" onClick={() => setTimerOn(true)} />
-                {checkGoal(count)}
-                {/* {checkBreak(count)} */}
+                {checkGoalBreak(count)}
                 <img
                     src={pause1}
                     alt="pause"
