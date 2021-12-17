@@ -16,12 +16,13 @@ export const Timer = () => {
     let userCount = 6;
     let userBreakTime = 1 * 1000;
     let userBreakCount = 2;
-    let breakTime = false;
+    // let breakTime = false;
 
     const [time, setTime] = useState(userTime);
     const [timerOn, setTimerOn] = useState(false);
     const [count, setCount] = useState(0);
     const [breakCounter, setBreakCounter] = useState(userBreakCount);
+    const [isBreak, setIsBreak] = useState(false);
 
     //60k ms in a minute
     const minutes = ('0' + Math.floor((time / 60000) % 60)).slice(-2);
@@ -56,45 +57,52 @@ export const Timer = () => {
         if (time === 0) {
             // play bell sound
             setTimerOn(false);
-            if (!breakTime) {
+            // console.log('---------');
+            // console.log(`count: ${count}`);
+            // console.log(`BreakCounter: ${breakCounter}`);
+            // console.log(count + 1 === breakCounter);
+
+            //breaktime is false already
+            console.log(isBreak);
+            // console.log(!isBreak);
+            if (!isBreak) {
+                console.log(
+                    `inside !isbreak for count increment should be true: ${!isBreak}`
+                );
                 setCount(previousCount => previousCount + 1);
+                console.log(`inside !isbreak after increment count: ${count}`);
             }
-            console.log('---------');
-            console.log(`count: ${count}`);
-            console.log(`BreakCounter: ${breakCounter}`);
-            console.log(count + 1 === breakCounter);
+
             if (count + 1 === breakCounter) {
+                //THIS NEEDS TO CHANGE TO WORK!!!
+                // setIsBreak(true);
+                // console.log(
+                //     `inside setting break isbreak should be true: ${isBreak}`
+                // );
+
                 setTime(userBreakTime);
-                console.log(`userBreakCount: ${userBreakCount}`);
+                console.log('inside setting break time and break counter');
                 setBreakCounter(
                     previousBreakCounter =>
                         previousBreakCounter + userBreakCount
                 );
                 console.log(` new BreakCounter: ${breakCounter}`);
+                setIsBreak(false);
             } else {
                 setTime(userTime);
             }
         }
         //DO A RETURN CLEAR?
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [time, breakCounter, count]);
+    }, [time, breakCounter, count, isBreak]);
 
     function checkGoalBreak(count, breakCounter) {
-        console.log(`function beginning count: ${count}`);
-        console.log(`function beginning breakCounter: ${breakCounter}`);
         if (count === userCount) {
             // play triumphant sound
             return 'GOAL REACHED!';
         } else if (count !== 0 && count === breakCounter - userBreakCount) {
-            console.log(
-                `inside breaktime and breakCounter is: ${breakCounter}`
-            );
-            console.log('count is: ' + count);
-            //count remains same as userBreakCount causing infinite loop!
             return 'BREAK TIME!';
-            // return breakTime;
         } else {
-            // put in variable
             return `${count} / ${userCount}`;
         }
     }
