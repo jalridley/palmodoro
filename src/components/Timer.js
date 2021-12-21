@@ -85,7 +85,6 @@ export const Timer = () => {
     function renderCountGoalBreak() {
         if (count - 1 === initUserCount + 1) {
             // play triumphant sound
-            console.log('hitting goal?');
             return 'GOAL REACHED!';
         } else if (count !== 0 && count === breakCounter - initUserBreakCount) {
             return 'BREAK TIME!';
