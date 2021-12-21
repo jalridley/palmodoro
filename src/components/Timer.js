@@ -60,48 +60,28 @@ export const Timer = () => {
         if (time === 0) {
             // play bell sound
             setTimerOn(false);
-            // console.log('---------');
-            // console.log(`count: ${count}`);
-            // console.log(`BreakCounter: ${breakCounter}`);
-            // console.log(count + 1 === breakCounter);
-
-            //breaktime is false already
-            console.log(isBreak);
-            // console.log(!isBreak);
-            // if (!isBreak) {
-            //     console.log(
-            //         `inside !isbreak for count increment should be true: ${!isBreak}`
-            //     );
-            //     setCount(previousCount => previousCount + 1);
-            //     console.log(`inside !isbreak after increment count: ${count}`);
-            // }
-
+            // break logic
             if (count === breakCounter) {
-                //THIS NEEDS TO CHANGE TO WORK!!!
-                // setIsBreak(true);
-                // console.log(
-                //     `inside setting break isbreak should be true: ${isBreak}`
-                // );
-
+                // set the time to the user's chosen break length
                 setTime(initUserBreakTime);
-                console.log('inside setting break time and break counter');
                 setBreakCounter(
+                    //increment the break counter by the user's chosen break count
+                    // so the next break time will be when the counter reaches it
+                    // ex. breaking after every 2 sprints causes break time at 2, 4, 6, etc.
                     previousBreakCounter =>
                         previousBreakCounter + initUserBreakCount
                 );
-                console.log(` new BreakCounter: ${breakCounter}`);
                 setIsBreak(false);
             } else {
+                // increment sprint count
                 setCount(previousCount => previousCount + 1);
                 setTime(initUserTime);
             }
-            console.log('count', count);
-            console.log('breakcounter', breakCounter);
         }
-        //DO A RETURN CLEAR?
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [time, breakCounter, count, isBreak]);
 
+    // what will be rendered to screen in between control buttons
     function renderCountGoalBreak() {
         if (count - 1 === initUserCount + 1) {
             // play triumphant sound
@@ -115,6 +95,9 @@ export const Timer = () => {
     }
     const setTimer = () => {
         // if count is already goal
+        // set the timer to the user's initial sprint time
+        // a bit of a hack solution to get the functionality of goal checking to work
+        // because count is starting at 0 therefore always behind
         if (count - 1 === initUserCount + 1) {
             setCount(initCount);
             setBreakCounter(initUserBreakCount);
@@ -130,6 +113,9 @@ export const Timer = () => {
                 <span>{milliseconds}</span>
             </div>
             <div className="controls">
+                {/* a bit of a hack solution to get the functionality of goal checking to work
+                because count is starting at 0 therefore always behind 
+                either shows reset button if goal was reached, or play if goal was not reached */}
                 {count - 1 === initUserCount + 1 ? (
                     <img src={reset} alt="reset" onClick={() => setTimer()} />
                 ) : (
@@ -142,6 +128,7 @@ export const Timer = () => {
                     onClick={() => setTimerOn(false)}
                 />
             </div>
+            {/* sets the time to initial user inputed time after goal is reached */}
             <div className="reset">
                 <img
                     src={reset}
