@@ -7,9 +7,13 @@ export const Menu = () => {
 
     const isMenuOpen = () => {
         setShowMenu(!showMenu);
-        console.log('inside is menu open function');
     };
-    console.log(showMenu);
+
+    /* const toggleMenu = () => {
+        if (showMenu) {
+            // div with user inputs
+        }
+    }; */
 
     return (
         <div>
@@ -21,7 +25,27 @@ export const Menu = () => {
                 alt="menu"
                 onClick={() => isMenuOpen()}
             />
-            {showMenu ? <div className="menu"></div> : null}
+            {/* temporary - fix the weird white dot behaviour */}
+            {showMenu ? (
+                <div className="menu">
+                    <div className="label-input">
+                        <label for="goal">Goal</label>
+                        <input type="number" />
+                    </div>
+                    <div className="label-input">
+                        <label for="duration">Session Duration</label>
+                        <input type="number" />
+                    </div>
+                    <div className="label-input">
+                        <label for="until-break">Sessions until Break</label>
+                        <input type="number" />
+                    </div>
+                    <div className="label-input">
+                        <label for="break">Break Duration</label>
+                        <input type="number" />
+                    </div>
+                </div>
+            ) : null}
         </div>
     );
 };
