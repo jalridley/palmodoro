@@ -21,13 +21,7 @@ export const Menu = () => {
                 alt="menu"
                 onClick={() => isMenuOpen()}
             />
-            {showMenu ? (
-                <div className="menu">
-                    <p style={{ color: 'white' }}>menu open</p>
-                </div>
-            ) : (
-                <p>showMenu false</p>
-            )}
+            {showMenu ? <div className="menu"></div> : null}
         </div>
     );
 };

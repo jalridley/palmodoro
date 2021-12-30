@@ -14,7 +14,7 @@ import reset from '../reset.svg';
 
 export const Timer = () => {
     // only for testing purposes. will come from menu component user inputs
-    const initUserTime = 2 * 100;
+    const initUserTime = 2 * 10;
     const initUserCount = 6;
     const initUserBreakTime = 1 * 1000;
     const initUserBreakCount = 2;
