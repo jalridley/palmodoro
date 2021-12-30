@@ -66,13 +66,33 @@ body {
 
         .menu {
             height: 100%;
-            width: 100%;
+            width: 99%; //to fix border blur
+            color: #ffff;
             border-radius: 2.5rem 2.5rem 0 0;
             margin: var(--margin-l-r);
             backdrop-filter: blur(10px);
             position: absolute;
             top: 0px;
             left: -2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 2.3rem;
+            font-family: 'VT323', monospace;
+
+            .label-input {
+                margin: 1rem;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            label {
+                background-color: #000;
+            }
+            input {
+                width: 7rem;
+                text-align: center;
+            }
         }
 
         .flamingo-image {
