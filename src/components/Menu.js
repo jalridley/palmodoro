@@ -1,9 +1,12 @@
 import React from 'react';
+import useStore from '../store';
 import { useState } from 'react';
 import menu from '../menu.svg';
 
 export const Menu = () => {
     const [showMenu, setShowMenu] = useState(false);
+    const goal = useStore(state => state.goal);
+    const setGoal = useStore(state => state.setGoal);
 
     const isMenuOpen = () => {
         setShowMenu(!showMenu);
@@ -30,7 +33,11 @@ export const Menu = () => {
                 <div className="menu">
                     <div className="label-input">
                         <label for="goal">Goal</label>
-                        <input type="number" />
+                        <input
+                            type="number"
+                            value={goal}
+                            onChange={e => setGoal(e.target.value)}
+                        />
                     </div>
                     <div className="label-input">
                         <label for="duration">Session Duration</label>
