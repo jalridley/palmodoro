@@ -74,6 +74,10 @@ export const Timer = () => {
             // play bell sound
             setTimerOn(false);
             // break logic
+            //fix bug from user input duration when zero
+            console.log(`time: ${time}`);
+            console.log(`count: ${count}`);
+            console.log(`break count: ${breakCounter}`);
             if (count === breakCounter) {
                 // set the time to the user's chosen break length
                 setTime(initUserBreakTime);
@@ -110,6 +114,7 @@ export const Timer = () => {
     // set the timer to the user's initial sprint time
     // a bit of a hack solution to get the functionality of goal checking to work
     // because count is starting at 0 therefore always behind
+    //function called by reset and play control buttons
     const setTimer = () => {
         if (count - 1 === initUserCount + 1) {
             setCount(initCount);
