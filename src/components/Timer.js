@@ -4,23 +4,33 @@ import pause1 from '../pause1.svg';
 import pause2 from '../pause2.svg';
 import play from '../play.svg';
 import reset from '../reset.svg';
+import useStore from '../store';
 
 /* to do
 -clean up logs and add comments
 -reset button remove
 -resize reset button at goal reached
 -change button colors between  ink and green when activated 
+-rename variables to match store variable names
+***fix input bug when user backspaces and it is empty or zero it shows breaktime
 */
 
 export const Timer = () => {
-    // only for testing purposes. will come from menu component user inputs
-    const initUserTime = 2 * 10;
-    const initUserCount = 6;
-    const initUserBreakTime = 1 * 1000;
-    const initUserBreakCount = 2;
-    const initCount = 1;
-    // let breakTime = false;
+    //states for inputs from store.js using zustand
+    const goal = useStore(state => state.goal);
+    const duration = useStore(state => state.duration);
+    const untilBreak = useStore(state => state.untilBreak);
+    const breakDuration = useStore(state => state.breakDuration);
 
+    // coming from menu component user inputs through zustand to share state with timer
+    //convert zustand return objects to number
+    const initUserCount = Number(goal);
+    const initUserTime = Number(duration) * 10;
+    const initUserBreakCount = Number(untilBreak);
+    const initUserBreakTime = Number(breakDuration) * 1000;
+    const initCount = 1;
+
+    //normal react state because it is only used in timer component
     const [time, setTime] = useState(initUserTime);
     const [timerOn, setTimerOn] = useState(false);
     const [count, setCount] = useState(initCount);
@@ -35,11 +45,12 @@ export const Timer = () => {
     const milliseconds = ('0' + ((time / 10) % 100)).slice(-2);
 
     // runs when component is rendered every time timer on changes
+    // when timer is on or off logic
+    // use setInterval js method
     useEffect(() => {
-        // when timer is on or off logic
-        // use setInterval js method
         let interval = null;
-
+        //rerender and setTime to user input changes
+        setTime(initUserTime);
         if (timerOn) {
             interval = setInterval(() => {
                 setTime(previous => previous - 10); // decrease time by 10 milliseconds
@@ -52,10 +63,12 @@ export const Timer = () => {
         return () => {
             clearInterval(interval);
         };
-    }, [timerOn]);
+    }, [timerOn, initUserTime]);
 
-    // console.log(time);
-
+    //logic for timer reaching 0
+    //checks if it is break time
+    //yes  - goes to break logic
+    //no - resets timer to initUserTime for another session
     useEffect(() => {
         if (time === 0) {
             // play bell sound
@@ -92,11 +105,12 @@ export const Timer = () => {
             return `${count - 1} / ${initUserCount}`;
         }
     }
+
+    //if count is already goal
+    // set the timer to the user's initial sprint time
+    // a bit of a hack solution to get the functionality of goal checking to work
+    // because count is starting at 0 therefore always behind
     const setTimer = () => {
-        // if count is already goal
-        // set the timer to the user's initial sprint time
-        // a bit of a hack solution to get the functionality of goal checking to work
-        // because count is starting at 0 therefore always behind
         if (count - 1 === initUserCount + 1) {
             setCount(initCount);
             setBreakCounter(initUserBreakCount);

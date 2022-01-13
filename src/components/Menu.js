@@ -5,8 +5,15 @@ import menu from '../menu.svg';
 
 export const Menu = () => {
     const [showMenu, setShowMenu] = useState(false);
+    //states for inputs from store.js using zustand
     const goal = useStore(state => state.goal);
     const setGoal = useStore(state => state.setGoal);
+    const duration = useStore(state => state.duration);
+    const setDuration = useStore(state => state.setDuration);
+    const untilBreak = useStore(state => state.untilBreak);
+    const setUntilBreak = useStore(state => state.setUntilBreak);
+    const breakDuration = useStore(state => state.breakDuration);
+    const setBreakDuration = useStore(state => state.setBreakDuration);
 
     const isMenuOpen = () => {
         setShowMenu(!showMenu);
@@ -28,11 +35,11 @@ export const Menu = () => {
                 alt="menu"
                 onClick={() => isMenuOpen()}
             />
-            {/* temporary - fix the weird white dot behaviour */}
+            {/* temporary - fix the weird white dot thing i don't know where is comes from */}
             {showMenu ? (
                 <div className="menu">
                     <div className="label-input">
-                        <label for="goal">Goal</label>
+                        <label>Goal</label>
                         <input
                             type="number"
                             value={goal}
@@ -40,16 +47,28 @@ export const Menu = () => {
                         />
                     </div>
                     <div className="label-input">
-                        <label for="duration">Session Duration</label>
-                        <input type="number" />
+                        <label>Session Duration</label>
+                        <input
+                            type="number"
+                            value={duration}
+                            onChange={e => setDuration(e.target.value)}
+                        />
                     </div>
                     <div className="label-input">
-                        <label for="until-break">Sessions until Break</label>
-                        <input type="number" />
+                        <label>Sessions until Break</label>
+                        <input
+                            type="number"
+                            value={untilBreak}
+                            onChange={e => setUntilBreak(e.target.value)}
+                        />
                     </div>
                     <div className="label-input">
-                        <label for="break">Break Duration</label>
-                        <input type="number" />
+                        <label>Break Duration</label>
+                        <input
+                            type="number"
+                            value={breakDuration}
+                            onChange={e => setBreakDuration(e.target.value)}
+                        />
                     </div>
                 </div>
             ) : null}
