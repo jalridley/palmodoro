@@ -26,7 +26,9 @@ export const Timer = () => {
     //convert zustand return objects to number
     const initUserCount = Number(goal);
     const initUserTime = Number(duration) * 10;
+
     const initUserBreakCount = Number(untilBreak);
+
     const initUserBreakTime = Number(breakDuration) * 1000;
     const initCount = 1;
 
@@ -77,10 +79,16 @@ export const Timer = () => {
             //fix bug from user input duration when zero
             console.log(`time: ${time}`);
             console.log(`count: ${count}`);
-            console.log(`break count: ${breakCounter}`);
+            console.log(`initUserBreakCount: ${breakCounter}`);
+            console.log(`untilBreak: ${untilBreak}`);
             if (count === breakCounter) {
                 // set the time to the user's chosen break length
                 setTime(initUserBreakTime);
+
+                console.log(`userBreakTime: ${initUserBreakTime}`);
+                console.log(`time: ${time}`);
+                console.log(`untilBreak: ${untilBreak}`);
+
                 setBreakCounter(
                     //increment the break counter by the user's chosen break count
                     // so the next break time will be when the counter reaches it
@@ -113,11 +121,12 @@ export const Timer = () => {
     //if count is already goal
     // set the timer to the user's initial sprint time
     // a bit of a hack solution to get the functionality of goal checking to work
-    // because count is starting at 0 therefore always behind
+    // because init count is starting at 1 therefore always ahead by 1
     //function called by reset and play control buttons
     const setTimer = () => {
         if (count - 1 === initUserCount + 1) {
             setCount(initCount);
+            //setBreakCounter(initUserBreakCount);
             setBreakCounter(initUserBreakCount);
         } else {
             setTimerOn(true);
@@ -132,7 +141,7 @@ export const Timer = () => {
             </div>
             <div className="controls">
                 {/* a bit of a hack solution to get the functionality of goal checking to work
-                because count is starting at 0 therefore always behind 
+                because count is starting at 1 therefore always ahead 
                 either shows reset button if goal was reached, or play if goal was not reached */}
                 {count - 1 === initUserCount + 1 ? (
                     <img src={reset} alt="reset" onClick={() => setTimer()} />
