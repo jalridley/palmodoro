@@ -87,11 +87,16 @@ body {
             }
 
             label {
+                padding: 0.5rem;
                 background-color: #000;
             }
             input {
                 width: 7rem;
                 text-align: center;
+            }
+
+            .error {
+                border: solid 2px red;
             }
         }
 

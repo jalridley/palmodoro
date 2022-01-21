@@ -10,9 +10,11 @@ import useStore from '../store';
 -clean up logs and add comments
 -reset button remove
 -resize reset button at goal reached
--change button colors between  ink and green when activated 
+-change button colors between pink and green when activated 
+-turn play green when input error
 -rename variables to match store variable names
-***fix input bug when user backspaces and it is empty or zero it shows breaktime
+**** in menu input duration to change css to red border on error classname
+it is not changing because value=duration does not change on backspace
 */
 
 export const Timer = () => {
@@ -26,9 +28,7 @@ export const Timer = () => {
     //convert zustand return objects to number
     const initUserCount = Number(goal);
     const initUserTime = Number(duration) * 10;
-
     const initUserBreakCount = Number(untilBreak);
-
     const initUserBreakTime = Number(breakDuration) * 1000;
     const initCount = 1;
 
@@ -46,45 +46,68 @@ export const Timer = () => {
     //10 = ms
     const milliseconds = ('0' + ((time / 10) % 100)).slice(-2);
 
+    //this is true if user inputs do not equal zero
+    const isValidInput = !(
+        initUserCount === 0 ||
+        initUserTime === 0 ||
+        initUserBreakCount === 0 ||
+        initUserBreakTime === 0
+    );
+
     // runs when component is rendered every time timer on changes
     // when timer is on or off logic
     // use setInterval js method
     useEffect(() => {
-        let interval = null;
-        //rerender and setTime to user input changes
-        setTime(initUserTime);
-        if (timerOn) {
-            interval = setInterval(() => {
-                setTime(previous => previous - 10); // decrease time by 10 milliseconds
-            }, 10);
-        } else {
-            clearInterval(interval);
-        }
+        if (isValidInput) {
+            let interval = null;
+            //rerender and setTime to user input changes
+            //time !== 0 added because of user input possibly being 0
+            //so timer does not go into negative
+            // setTime(initUserTime); functioning original before zustand but does not set to break time
+            //setTime(time); doesn't show input changes in real time
+            console.log(`line 57 ${initUserTime} ${isBreak}`);
+            if (isBreak === false) {
+                setTime(initUserTime);
+            } else {
+                setTime(initUserBreakTime);
+            }
 
-        // cleanup to stop interval when user leaves the page
-        return () => {
-            clearInterval(interval);
-        };
-    }, [timerOn, initUserTime]);
+            console.log(`time for setInterval: ${time}`);
+            if (timerOn && time !== 0) {
+                interval = setInterval(() => {
+                    setTime(previous => previous - 10); // decrease time by 10 (milliseconds)
+                }, 10);
+            } else {
+                clearInterval(interval);
+            }
+
+            // cleanup to stop interval when user leaves the page
+            return () => {
+                clearInterval(interval);
+            };
+        }
+    }, [timerOn, initUserTime, initUserBreakTime]);
 
     //logic for timer reaching 0
     //checks if it is break time
     //yes  - goes to break logic
     //no - resets timer to initUserTime for another session
     useEffect(() => {
-        if (time === 0) {
+        //initUserTime !== 0 does not allow for duration user input to be 0
+        if (isValidInput && time === 0) {
             // play bell sound
             setTimerOn(false);
             // break logic
             //fix bug from user input duration when zero
-            console.log(`time: ${time}`);
-            console.log(`count: ${count}`);
-            console.log(`initUserBreakCount: ${breakCounter}`);
-            console.log(`untilBreak: ${untilBreak}`);
-            if (count === breakCounter) {
+            console.log(`time when not break: ${time}`);
+
+            if (count !== 1 && count === breakCounter) {
                 // set the time to the user's chosen break length
+                console.log(`line 89`);
                 setTime(initUserBreakTime);
 
+                console.log('-----inside setTime to initUserBreakTime---');
+                console.log('Updated Time 1:', time);
                 console.log(`userBreakTime: ${initUserBreakTime}`);
                 console.log(`time: ${time}`);
                 console.log(`untilBreak: ${untilBreak}`);
@@ -96,25 +119,39 @@ export const Timer = () => {
                     previousBreakCounter =>
                         previousBreakCounter + initUserBreakCount
                 );
-                setIsBreak(false);
+                setIsBreak(true);
             } else {
                 // increment sprint count
+                setIsBreak(false);
                 setCount(previousCount => previousCount + 1);
+                console.log(`line 109`);
                 setTime(initUserTime);
             }
         }
+        console.log('Updated Time:', time);
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [time, breakCounter, count, isBreak]);
+    }, [time, breakCounter, count, isBreak, untilBreak]);
 
     // what will be rendered to screen in between control buttons
     function renderCountGoalBreak() {
-        if (count - 1 === initUserCount + 1) {
-            // play triumphant sound
-            return 'GOAL REACHED!';
-        } else if (count !== 0 && count === breakCounter - initUserBreakCount) {
-            return 'BREAK TIME!';
+        console.log(
+            `duration in render function: ${initUserTime} ${isValidInput} ${initUserBreakCount}`
+        );
+        if (isValidInput) {
+            if (count - 1 === initUserCount + 1) {
+                // play triumphant sound
+                return 'GOAL REACHED!';
+            } else if (
+                count !== 0 &&
+                count === breakCounter - initUserBreakCount
+            ) {
+                return 'BREAK TIME!';
+            } else {
+                return `${count - 1} / ${initUserCount}`;
+            }
         } else {
-            return `${count - 1} / ${initUserCount}`;
+            return 'INVALID INPUT';
         }
     }
 
@@ -124,20 +161,29 @@ export const Timer = () => {
     // because init count is starting at 1 therefore always ahead by 1
     //function called by reset and play control buttons
     const setTimer = () => {
-        if (count - 1 === initUserCount + 1) {
-            setCount(initCount);
-            //setBreakCounter(initUserBreakCount);
-            setBreakCounter(initUserBreakCount);
-        } else {
-            setTimerOn(true);
+        if (isValidInput) {
+            if (count - 1 === initUserCount + 1) {
+                setCount(initCount);
+                setBreakCounter(initUserBreakCount);
+                console.log(`timer function 1 ${initUserBreakCount}`);
+            } else {
+                setTimerOn(true);
+                console.log(`timer function 2 ${initUserBreakCount}`);
+            }
         }
     };
     return (
         <div>
             <div className="timer">
-                <span>{minutes}:</span>
-                <span>{seconds}:</span>
-                <span>{milliseconds}</span>
+                {isValidInput ? (
+                    <div>
+                        <span>{minutes}:</span>
+                        <span>{seconds}:</span>
+                        <span>{milliseconds}</span>
+                    </div>
+                ) : (
+                    <div style={{ color: 'red' }}>ERROR</div>
+                )}
             </div>
             <div className="controls">
                 {/* a bit of a hack solution to get the functionality of goal checking to work

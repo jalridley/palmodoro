@@ -19,12 +19,6 @@ export const Menu = () => {
         setShowMenu(!showMenu);
     };
 
-    /* const toggleMenu = () => {
-        if (showMenu) {
-            // div with user inputs
-        }
-    }; */
-
     return (
         <div>
             {/* if showMenu is true, show menus svg and the dropdown menu
@@ -41,14 +35,19 @@ export const Menu = () => {
                     <div className="label-input">
                         <label>Goal</label>
                         <input
+                            /* changes the className to use in css to make red border error input */
+                            className={goal === 0 ? 'error' : 'defaultNumber'}
                             type="number"
-                            value={goal}
                             onChange={e => setGoal(e.target.value)}
+                            value={goal}
                         />
                     </div>
                     <div className="label-input">
                         <label>Session Duration</label>
                         <input
+                            className={
+                                duration === 0 ? 'error' : 'defaultNumber'
+                            }
                             type="number"
                             value={duration}
                             onChange={e => setDuration(e.target.value)}
